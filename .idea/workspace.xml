@@ -2,14 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="da0a0066-578b-4c80-9c97-219435b9c0c3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/java_before8/OptionalTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/java_before8/StaticMethod.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/java_before8/StreamTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/java.iml" beforeDir="false" afterPath="$PROJECT_DIR$/java.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/java9/module2_msa/eshop/src/main/java/module-info.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java_before8/StreamTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/java_before8/StreamTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,7 +121,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/java_before8/StreamTest.java</url>
-          <line>54</line>
+          <line>58</line>
           <properties>
             <option name="lambda-ordinal" value="-1" />
           </properties>
