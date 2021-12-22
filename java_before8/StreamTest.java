@@ -1,12 +1,19 @@
+import java.io.IOException;
 import java.io.Serializable;
 import java.lang.reflect.Array;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalAdjuster;
 import java.time.temporal.TemporalAdjusters;
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.IntPredicate;
+import java.util.function.Predicate;
+import java.util.stream.*;
 
 public class StreamTest {
 
@@ -156,6 +163,171 @@ public class StreamTest {
         LocalDate start = LocalDate.now();
         LocalDate end = LocalDate.now().plusMonths(1)
                 .with(TemporalAdjusters.lastDayOfMonth());
+        // create stream of dates
+        List<LocalDate> dates = Stream.iterate(start, date -> date.plusDays(1))
+                .limit(ChronoUnit.DAYS.between(start, end))
+                .collect(Collectors.toList());
+
+        LocalDate max = dates.stream()
+                .max(Comparator.comparing(LocalDate::toEpochDay))
+                .get();
+        LocalDate min = dates.stream()
+                .min(Comparator.comparing(LocalDate::toEpochDay))
+                .get();
+
+        System.out.println("max date is " + max);
+        System.out.println("min date is " + min);
+
+        // Find min max numbers
+        Integer maxNumber = Stream.of(1, 2, 3, 4, 5, 6, 7, 8, 9)
+                .max(Comparator.comparing(Integer::valueOf))
+                .get();
+        Integer minNumber = Stream.of(1, 2, 3, 4, 5, 6, 7, 8, 9)
+                .min(Comparator.comparing(Integer::valueOf))
+                .get();
+        System.out.println("max number is " + maxNumber);
+        System.out.println("min number is " + minNumber);
+
+        // Find min max object by key
+        List<Employee> employees = new ArrayList<>();
+        employees.add(new Employee(1, "Lokesh", 36));
+        employees.add(new Employee(2, "Alex", 46));
+        employees.add(new Employee(3, "Brian", 52));
+
+        Comparator<Employee> comparator = Comparator.comparing(Employee::getSalary);
+        Employee minObj = employees.stream().min(comparator).get();
+        Employee maxObj = employees.stream().max(comparator).get();
+        System.out.println("min object is " + minObj);
+        System.out.println("max object is " + maxObj);
+    }
+
+    public static void test_streamOfRandom() {
+        Random random = new Random();
+
+        random.ints(5).sorted().forEach(System.out::println);
+        random.doubles(5, 0, 0.5)
+                .sorted().forEach(System.out::println);
+        List<Long> longs = random.longs(5).boxed().collect(Collectors.toList());
+        System.out.println(longs);
+    }
+
+    public static void test_streamCount() {
+        long count = Stream.of("how", "to", "do", "in", "java")
+                .count();
+        System.out.printf("there are %d words in the stream \n", count);
+
+        count = Stream.of(1, 2, 3, 4, 5, 6, 7, 8)
+                .collect(Collectors.counting());
+        System.out.printf("there are %d integers in the stream \n", count);
+    }
+
+    public static void test_getLastElement() {
+        // by reduce
+        Stream<Integer> stream = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9).stream();
+        Integer last = stream.reduce((first, second) -> second)
+                .orElse(-1);
+        System.out.println(last);
+
+        stream = Stream.empty();
+        last = stream.reduce((first, second) -> second)
+                .orElse(-1);
+        System.out.println(last);
+
+        //Streams.findLast() examples
+    }
+
+    public static void test_removeDuplicates() {
+        List<String> list = Arrays.asList("A", "B", "C", "D", "A", "B", "C");
+        List<String> distinctItems = list.stream().distinct()
+                .collect(Collectors.toList());
+        System.out.println(distinctItems);
+        //can also distinct POJOs
+
+        //use Collectors.toSet()
+        ArrayList<Integer> numbersList = new ArrayList<>(
+                Arrays.asList(1, 1, 2, 3, 3, 3, 4, 5, 6, 6, 6, 7, 8));
+        Set<Integer> set = numbersList.stream().collect(Collectors.toSet());
+
+        System.out.println(set);
+
+        //use Collectors.toMap()
+        Map<Integer, Long> elementCountMap = numbersList.stream()
+                .collect(Collectors.toMap(Function.identity(), v -> 1L, Long::sum));
+        System.out.println(elementCountMap);
+    }
+
+    public static boolean isPrime(int i) {
+        IntPredicate isDivisible = index -> i % index == 0;
+        return i > 1 && IntStream.range(2, i).noneMatch(isDivisible);
+    }
+
+    public static void test_IntPredicate() {
+        IntPredicate isOdd = arg -> arg % 2 == 1;
+        IntStream stream = IntStream.range(1, 20);
+
+        List<Integer> oddPrimes = stream.filter(isOdd.and(StreamTest::isPrime))
+                .boxed()
+                .collect(Collectors.toList());
+        System.out.println(oddPrimes);
+    }
+
+    public static void test_readFileLineByLine() {
+        Path filePath = Paths.get("./java_before8", "data.txt");
+        try (Stream<String> lines = Files.lines(filePath)) {
+            lines.forEach(System.out::println);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void test_StreamIfElse() {
+        // Apply if-else logic in streams
+        ArrayList<Integer> numberList =
+                new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9));
+        Consumer<Integer> action = i -> {
+            if (i % 2 == 0) {
+                System.out.println("Even number " + i);
+            } else {
+                System.out.println("Odd Number " + i);
+            }
+        };
+        numberList.stream().forEach(action);
+
+        Predicate<Integer> isEven = i -> i % 2 == 0;
+        numberList.stream().filter(isEven).forEach(System.out::println);
+    }
+
+    public static void test_reuseStream() {
+        // can we reuse stream? NO!!!, just create it multi times
+        List<Integer> tokens = Arrays.asList(1, 2, 3, 4, 5);
+
+        //first use
+        Optional<Integer> result = tokens.stream().max(Integer::compareTo);
+        System.out.println(result.get());
+
+        //second use
+        result = tokens.stream().min(Integer::compareTo);
+        System.out.println(result.get());
+
+        //third use
+        long count = tokens.stream().count();
+        System.out.println(count);
+    }
+
+    public static void test_iteratorToStream() {
+        //java8
+        Iterator<String> iterator = Arrays.asList("a", "b", "c").listIterator();
+        Spliterator<String> spliterator = Spliterators
+                .spliteratorUnknownSize(iterator, Spliterator.ORDERED);
+
+        Stream<String> stream = StreamSupport.stream(spliterator, false);
+        stream.forEach(System.out::println);
+
+        //java9
+        Stream.generate(() -> null)
+                .takeWhile(x -> iterator.hasNext())
+                .map(n -> iterator.next())
+                .forEach(System.out::println);
     }
 
     public static void main(String[] args) {
@@ -175,6 +347,26 @@ public class StreamTest {
         test_mapAndFlatmap();
 
         test_infiniteStreams();
+
+        test_findMinMax();
+
+        test_streamOfRandom();
+
+        test_streamCount();
+
+        test_getLastElement();
+
+        test_removeDuplicates();
+
+        test_IntPredicate();
+
+        test_readFileLineByLine();
+
+        test_StreamIfElse();
+
+        test_reuseStream();
+
+        test_iteratorToStream();
     }
 
 

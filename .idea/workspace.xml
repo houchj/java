@@ -2,8 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="da0a0066-578b-4c80-9c97-219435b9c0c3" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/java_before8/FunctionalInterfaceTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/java_before8/LocalDateTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/java_before8/MethodReference.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/java_before8/data.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java_before8/OptionalTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/java_before8/OptionalTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/java_before8/StreamTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/java_before8/StreamTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/java/OptionalTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java/OptionalTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/java/StreamTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java/StreamTest.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,6 +23,14 @@
         <option value="Class" />
       </list>
     </option>
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -36,16 +51,10 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.StreamTest">
-    <configuration name="OptionalTest (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="java_before8.Optional.OptionalTest" />
+  <component name="RunManager" selected="Application.FunctionalInterfaceTest">
+    <configuration name="FunctionalInterfaceTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="FunctionalInterfaceTest" />
       <module name="java" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="java_before8.Optional.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -86,11 +95,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.FunctionalInterfaceTest" />
+        <item itemvalue="Application.OptionalTest" />
         <item itemvalue="Application.StreamTest" />
         <item itemvalue="Application.StaticMethod" />
         <item itemvalue="Application.OptionalTest (2)" />
-        <item itemvalue="Application.OptionalTest (1)" />
-        <item itemvalue="Application.OptionalTest" />
       </list>
     </recent_temporary>
   </component>
@@ -121,7 +130,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/java_before8/StreamTest.java</url>
-          <line>58</line>
+          <line>65</line>
           <properties>
             <option name="lambda-ordinal" value="-1" />
           </properties>
